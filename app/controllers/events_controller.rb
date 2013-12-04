@@ -1,5 +1,8 @@
 class EventsController < ApplicationController
-	before_action :set_event, only: [:show, :edit, :update, :destroy]
+	require 'date'
+	require 'time'
+	# before_action :set_event, only: [:show, :edit, :update, :destroy]
+	before_action :correct_user,   only: :destroy
 
 	def index
 		@event = Event.new
@@ -11,7 +14,7 @@ class EventsController < ApplicationController
 	    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
 	        marker.lat event.latitude
 	        marker.lng event.longitude
-	        marker.infowindow  "<h5>" + event.event_name + "</h5>" + event.location
+	        marker.infowindow  "<h5>" + event.event_name + "</h5>"
 	        marker.picture({"url" => "http://maps.google.com/mapfiles/kml/paddle/" + @indStr +"_maps.png",
 	              "width" =>  32, 
 	              "height" => 32 }) 
@@ -44,11 +47,13 @@ class EventsController < ApplicationController
 	end
 
 	def destroy
-		session[:user_id] = nil
+	    @event.delete
+	    redirect_to events_path
 	end
 
-    def set_event
-      @event = Event.find(current_user['id'])
+    def correct_user
+      @event = current_user.events.find_by(id: params[:id])
+      redirect_to events_path if @event.nil?
     end
 
 	def event_params

@@ -26,7 +26,7 @@
       <%= f.label :location, 'Location Address' %>
       <%= f.text_field :location %>
       <%= f.label :event_details %>
-      <%= text_area_tag(:event_details) %>
+      <textarea name="event[event_details]" id="event_details"></textarea>
       <%= f.label :event_date, 'Event Date' %>
       <%= date_field(:event, :event_date) %>
       <%= f.label :event_time, 'Event Time' %>      

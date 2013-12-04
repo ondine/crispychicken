@@ -16,7 +16,12 @@
                       <li><img src= "http://maps.google.com/mapfiles/kml/paddle/<%= iStr %>.png" class="markerSize" />&nbsp;<a href="javascript:void(0)" class="mapEventName" id="<%= i %>"><%= event.event_name %></a></li> 
                       <li>
                           <ul>
+                              <li class="mapEventLocation">Date: <%= event.event_date %> @ <%= event.event_time.strftime("%H:%M:%S") %></li>
                               <li class="mapEventLocation"><%= event.address %></li>
+                              <li class="mapEventLocation"><%= event.event_details %></li>
+                              <li class="mapEventLocation">
+                                <%= link_to "Delete", event, method: :delete %>
+                              </li>
                               <li></li>
                           </ul>
                       </li>
