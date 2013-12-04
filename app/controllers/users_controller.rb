@@ -1,36 +1,27 @@
 class UsersController < ApplicationController
+	# Homepage - allows creation of user 
 	def index
-		# redirect_to events_path if not session[:user_id].nil?
-		session[:person] = nil
 		@user = User.new
 	end
 
+	# Additional user account creation page
 	def new 
 		@user = User.new
 	end
 
-	def edit
-
-	end
-
+	# Creates user account based on First Name, Last Name, Email, Password, Password Confirmation
 	def create
 		@user = User.new(user_params)
 
 		if @user.save
 			session[:user_id] = @user.id
+			# If user account is successfully created, log user in
 			sign_in @user
 			redirect_to events_path, :notice => "Welcome #{@user.firstname}!"
 		else
-			render "index"
+			# Else redirect to home page
+			redirect_to root_url
 		end
-	end
-
-	def update
-
-	end
-
-	def destroy
-		session[:user_id] = nil
 	end
 
 	def user_params
