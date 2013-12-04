@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 	# Ensures password and confirm password are correct and converts to secure password
 	has_secure_password
 	validates :password, length: { minimum: 6 }
+	
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64
 	end
