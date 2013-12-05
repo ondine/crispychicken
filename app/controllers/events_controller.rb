@@ -45,7 +45,7 @@ class EventsController < ApplicationController
 	# Checks for correct user using correct_user method
 	def destroy
 		@event.delete
-		redirect_to events_path
+		redirect_to event_path
 	end
 
 	# Sets the event id based on the user session and id parameter
