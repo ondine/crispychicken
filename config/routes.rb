@@ -1,4 +1,6 @@
 Crispychicken::Application.routes.draw do
+  match '/events/public',  to: 'events#public', via: 'get'
+  
   resources :users, :events, :sessions
 
   root :to => "users#index"

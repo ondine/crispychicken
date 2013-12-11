@@ -25,6 +25,23 @@ class EventsController < ApplicationController
 		end    
 	end
 
+	#Public Event display page - shows events and map of a given user to the public
+	def public
+		@events = Event.where(:user_id => params[:event_id])		
+		@indStr = 'A'
+		@hash = Gmaps4rails.build_markers(@events) do |event, marker|
+			marker.lat event.latitude
+			marker.lng event.longitude
+			marker.infowindow  "<h5>" + event.event_name + "</h5>"
+			marker.picture({"url" => "http://maps.google.com/mapfiles/kml/paddle/" + @indStr +"_maps.png",
+				"width" =>  32, 
+				"height" => 32 }) 
+			marker.json({event_name: event.event_name, address: event.address})  
+			@indStr = @indStr.succ      
+		end    
+
+	end
+
 	# Event creation page - stores individual events to database
 	def create
 		@event = Event.new(event_params)
