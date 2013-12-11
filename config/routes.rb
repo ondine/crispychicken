@@ -2,7 +2,8 @@ Crispychicken::Application.routes.draw do
   match '/events/public',  to: 'events#public', via: 'get'
   
   resources :users, :events, :sessions
-
+  match '/about',  to: 'information#about',            via: 'get'
+  match '/contact',  to: 'information#contact',            via: 'get'
   root :to => "users#index"
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
