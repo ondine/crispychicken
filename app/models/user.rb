@@ -1,31 +1,26 @@
 class User < ActiveRecord::Base
-	# Changes email to downcase before saving
-	before_save { self.email = email.downcase }
-	before_create :create_remember_token
-	# Each user may have many events
-	has_many :events
-	attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
-	validates :firstname, presence: true
-	validates :lastname, presence: true
-	# Email Regex
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	# Email is required and unique
-	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-	# Ensures password and confirm password are correct and converts to secure password
-	has_secure_password
-	validates :password, length: { minimum: 6 }
-	
-	def User.new_remember_token
-		SecureRandom.urlsafe_base64
-	end
+  has_many :events
+  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.firstname = auth.info.first_name
+      user.lastname = auth.info.last_name
+      user.email = auth.info.email
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
 
-	def User.encrypt(token)
-		Digest::SHA1.hexdigest(token.to_s)
-	end
+      p auth.inspect
+    end
+  end	
 
-	private
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
 
-	def create_remember_token
-	  self.remember_token = User.encrypt(User.new_remember_token)
-	end
+  def User.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
 end
