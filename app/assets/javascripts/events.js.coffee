@@ -2,14 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
-  $("#new_event").on("ajax:success", (e, data, status, xhr) ->
-    if(status == "success")
-      $('.alert-success').text('Successfully added event').addClass('show');
-      $('#new_event')[0].reset();
-  ).bind "ajax:error", (e, xhr, status, error) ->
-    $("#new_event").append "<p>ERROR</p>"
-
 class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from builtin builder
   create_infowindow: ->
     return null unless _.isString @args.infowindow
@@ -43,3 +35,10 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
       marker = markers[i]
       google.maps.event.trigger marker.getServiceObject(), "click"
 
+$(document).ready ->
+  $("#new_event").on("ajax:success", (e, data, status, xhr) ->
+    if(status == "success")
+      $('.alert-success').text('Successfully added event').addClass('show');
+      $('#new_event')[0].reset();
+  ).bind "ajax:error", (e, xhr, status, error) ->
+    $("#new_event").append "<p>ERROR</p>"

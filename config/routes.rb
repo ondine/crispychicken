@@ -1,16 +1,22 @@
 Crispychicken::Application.routes.draw do
-  get "email/new"
+    get "email/new"
   get "email/create"
   match '/events/public',  to: 'events#public', via: 'get'
   match '/contact',  to: 'email#new', via: 'get' 
 
-  resources :users, :events, :sessions
+  
+  resources :users, :events
+  resources :sessions do 
+   # post 'login'
+  end
 
 
   root :to => "users#index"
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/signup',  to: 'users#new',                      via: 'get'
+  match '/signin',  to: 'sessions#new',                   via: 'get'
+  match '/signout', to: 'sessions#destroy',               via: [:get, :post]
+  match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'),                via: [:get, :post]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
