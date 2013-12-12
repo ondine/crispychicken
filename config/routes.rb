@@ -1,14 +1,17 @@
 Crispychicken::Application.routes.draw do
-
+  
+  
+  
   resources :users, :events, :sessions
   match '/about',  to: 'information#about',            via: 'get'
-  match '/contact',  to: 'information#contact',            via: 'get'
+ 
   root :to => "users#index"
   match '/signup',  to: 'users#new',                      via: 'get'
   match '/signin',  to: 'sessions#new',                   via: 'get'
   match '/signout', to: 'sessions#destroy',               via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

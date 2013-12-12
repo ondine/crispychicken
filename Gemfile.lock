@@ -167,11 +167,9 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mysql2
-  pony
-
   omniauth
   omniauth-facebook (= 1.4.0)
-
+  pony
   protected_attributes
   rails (= 4.0.1)
   sass-rails (~> 4.0.0)
