@@ -27,7 +27,7 @@
       <%= date_field(:event, :event_date) %>
       <%= f.label :event_time, 'Event Time' %>      
       <%= time_field(:event, :event_time) %>
-      <%= hidden_field(:event, :user_id, :value => current_user['id'] ) %>
+      <%= hidden_field(:event, :user_id, :value => session[:user_id] ) %>
     </div> <!--form-group-->
     <hr>
     <div class="modal-footer">

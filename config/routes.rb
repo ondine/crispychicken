@@ -1,10 +1,17 @@
 Crispychicken::Application.routes.draw do
-  resources :users, :events, :sessions
+  match '/events/public', to: 'events#public',            via: 'get'
+  
+  resources :users, :events
+  resources :sessions do 
+   # post 'login'
+  end
 
   root :to => "users#index"
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/signup',  to: 'users#new',                      via: 'get'
+  match '/signin',  to: 'sessions#new',                   via: 'get'
+  match '/signout', to: 'sessions#destroy',               via: [:get, :post]
+  match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'),                via: [:get, :post]
 
   get "google_places/index"
   get "google_places/show"

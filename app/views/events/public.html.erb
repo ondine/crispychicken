@@ -2,9 +2,6 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js' type='text/javascript'></script>
-<div class="alert alert-success">
-<strong>Public URL:</strong><a href="/events/public?event_id=<%= session[:user_id] %>"> <%= root_url %>events/public?event_id=<%= session[:user_id] %></a>
-</div>
 <table>
     <tr>
       <td style="width: 31%;" align="left" valign="top">
@@ -23,7 +20,6 @@
                               <li class="mapEventLocation"><%= event.address %></li>
                               <li class="mapEventLocation"><%= event.event_details %></li>
                               <li class="mapEventLocation">
-                                <%= link_to "Delete", event, method: :delete %>
                               </li>
                               <li></li>
                           </ul>
