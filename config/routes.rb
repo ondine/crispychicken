@@ -1,4 +1,6 @@
 Crispychicken::Application.routes.draw do
+  get "email/new"
+  get "email/create"
   match '/events/public',  to: 'events#public', via: 'get'
   
   resources :users, :events, :sessions
