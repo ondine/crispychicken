@@ -50,6 +50,8 @@ gem 'bcrypt-ruby'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 
+gem 'pony'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -2,10 +2,8 @@ module SessionsHelper
   # Sign in user
   # Remembers users login details
   def sign_in(user)
-    remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
-    user.update_attribute(:remember_token, User.encrypt(remember_token))
-    self.current_user = user
+    @current_user = user
+    session[:user_id] = user.id
   end	
 
   # Checks if user is signed in
@@ -20,8 +18,9 @@ module SessionsHelper
 
   # Sets current user based on token if available
   def current_user
-    remember_token = User.encrypt(cookies[:remember_token])
-    @current_user ||= User.find_by(remember_token: remember_token)
+    # remember_token = User.encrypt(cookies[:remember_token])
+    # @current_user ||= User.find_by(remember_token: remember_token)
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   # Signs user out

@@ -66,7 +66,6 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to "Settings", '#' %></li>
                   <li class="divider"></li>
                   <li><%= link_to "Sign out", signout_path %></li>                  
                   <li>
@@ -76,23 +75,24 @@
             <% else %>
             <li>
               <!-- 
-              <%= form_for(:session, url: sessions_path) do |f| %>
-              <%= f.text_field :email, :placeholder => "Email Address" %>
-              <%= f.password_field :password, :placeholder => "Password" %>
-              <%= f.submit "Sign in", class: "btn btn-small" %>
-              <% end %>
               -->
               <% if current_user %>
               Welcome <strong><%= current_user.name %></strong>!
               <%= link_to "Sign out", signout_path, id: "sign_out" %>
               <% else %>
-                <a href="/auth/facebook" id="sign_in" class="btn fbicon"><%= image_tag "facebook.png", :height => '20px', :width => '20px' %> Login With Faceook</a>
+                <%= form_for(:session, url: sessions_path) do |f| %>
+                <%= f.text_field :email, :placeholder => "Email Address" %>
+                <%= f.password_field :password, :placeholder => "Password" %>
+                <%= f.submit "Sign in", class: "btn btn-small" %>
+                <a href="/auth/facebook" id="sign_in" class="btn fbicon"><%= image_tag "facebook.png", :height => '20px', :width => '20px' %></a>
+                <% end %>
               <% end %>
           </li>
             <% end %>          
           <% end %>
       <% end %>
     </div>
+  <div>
     <%= bootstrap_flash %>
     <%= yield %>
   </div>
