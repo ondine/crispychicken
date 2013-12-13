@@ -1,4 +1,8 @@
 Crispychicken::Application.routes.draw do
+<<<<<<< HEAD
+  get "email/new"
+  get "email/create"
+  match '/events/public',  to: 'events#public', via: 'get'
 
   resources :users, :events, :sessions
   match '/about',  to: 'information#about',            via: 'get'
@@ -8,6 +12,11 @@ Crispychicken::Application.routes.draw do
   resources :sessions do 
    # post 'login'
   end
+
+
+
+
+
   root :to => "users#index"
   match '/signup',  to: 'users#new',                      via: 'get'
   match '/signin',  to: 'sessions#new',                   via: 'get'
@@ -21,9 +30,15 @@ end
 
   
 
+
+  resources :emails, :only => [:new, :create] do
+     get 'thank_you', :on => :collection
+  end
+
   get "google_places/index"
   get "google_places/show"
   get "google_places/set_session"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -79,4 +94,8 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+ 
+   
 end
