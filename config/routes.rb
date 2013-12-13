@@ -1,14 +1,20 @@
 Crispychicken::Application.routes.draw do
-    get "email/new"
+<<<<<<< HEAD
+  get "email/new"
   get "email/create"
   match '/events/public',  to: 'events#public', via: 'get'
-  match '/contact',  to: 'email#new', via: 'get' 
 
-  
+  resources :users, :events, :sessions
+  match '/about',  to: 'information#about',            via: 'get'
+  match '/contact',  to: 'emails#new',            via: 'get'
+  match '/emails',  to: 'emails#thank_you',            via: 'get'
   resources :users, :events
   resources :sessions do 
    # post 'login'
   end
+
+
+
 
 
   root :to => "users#index"
@@ -17,6 +23,12 @@ Crispychicken::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',               via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
+  
+  resources :emails, :only => [:new, :create] do
+     get 'thank_you', :on => :collection
+end
+
+  
 
 
   resources :emails, :only => [:new, :create] do
