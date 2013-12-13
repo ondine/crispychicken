@@ -4,4 +4,7 @@
 
 <button click="savePosition(position);">Current Location</button>
 
-
+<br>
+<%  @spotList.each do |x| %>
+  <%= x.name %> <br/>
+<% end %>
