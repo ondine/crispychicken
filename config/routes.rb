@@ -13,11 +13,9 @@ Crispychicken::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
 
-  get "google_places/index"
-  get "google_places/show"
-  get "google_places/set_session"
-
-  # The priority is based upon order of creation: first created -> highest priority.
+  match '/show', to: 'google_places#show',  		  via: 'get'
+  match '/set_session', to: 'google_places#set_session',     via: 'get'
+# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

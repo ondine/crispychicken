@@ -42,3 +42,4 @@ $(document).ready ->
       $('#new_event')[0].reset();
   ).bind "ajax:error", (e, xhr, status, error) ->
     $("#new_event").append "<p>ERROR</p>"
+
