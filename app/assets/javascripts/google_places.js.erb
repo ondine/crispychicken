@@ -1,0 +1,19 @@
+$(document).ready(function() {
+ if (navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(savePosition);
+  }
+  else{
+    $("#location").html("Geolocation is not supported by this browser.")
+  };
+
+  function savePosition(position){
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "set_session",
+      data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
+      success: function(data){
+    }
+    });
+  };
+});

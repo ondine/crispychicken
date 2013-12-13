@@ -18,9 +18,15 @@ Crispychicken::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
 
+
   resources :emails, :only => [:new, :create] do
-     get 'thank_you', :on => collection
-end
+     get 'thank_you', :on => :collection
+  end
+
+  get "google_places/index"
+  get "google_places/show"
+  get "google_places/set_session"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
