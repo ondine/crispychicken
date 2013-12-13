@@ -1,0 +1,7 @@
+<% if session[:current_position].present? %>
+  <%= session[:current_position].to_s %>
+<% end %>
+
+<button click="savePosition(position);">Current Location</button>
+
+

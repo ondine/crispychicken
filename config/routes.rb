@@ -21,6 +21,10 @@ end
 
   
 
+  get "google_places/index"
+  get "google_places/show"
+  get "google_places/set_session"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -45,6 +45,9 @@ gem 'foursquare2'
 # Twitter Bootstrap for Rails
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
+# Google Places
+gem 'google_places'
+
 gem 'protected_attributes'
 
 gem 'bcrypt-ruby'
