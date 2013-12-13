@@ -54,7 +54,7 @@
                   My Events <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to 'My Events', "events/show", 'data-no-turbolink' => true %></li>
+                  <li><%= link_to 'My Events', "/events/show", 'data-no-turbolink' => true %></li>
                   <li><%= link_to "Add Events", '/events' %></li>
                   <li>
                   </li>
@@ -95,10 +95,10 @@
   <div>
     <%= bootstrap_flash %>
     <%= yield %>
-  </div>
-    <div class="footer">
-      <p>&copy; Crispy Chicken 2013</p>
-    </div>
+     <div class="footer">
+       <p>&copy; Crispy Chicken 2013</p>
+     </div>
+   </div>
   </div> <!-- /container -->
 
 </body>

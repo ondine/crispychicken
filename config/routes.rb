@@ -1,10 +1,20 @@
 Crispychicken::Application.routes.draw do
-  match '/events/public', to: 'events#public',            via: 'get'
-  
+  get "email/new"
+  get "email/create"
+  match '/events/public',  to: 'events#public', via: 'get'
+
+  resources :users, :events, :sessions
+  match '/about',  to: 'information#about',            via: 'get'
+  match '/contact',  to: 'emails#new',            via: 'get'
+  match '/emails',  to: 'emails#thank_you',            via: 'get'
   resources :users, :events
   resources :sessions do 
    # post 'login'
   end
+
+
+
+
 
   root :to => "users#index"
   match '/signup',  to: 'users#new',                      via: 'get'
@@ -12,11 +22,22 @@ Crispychicken::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',               via: [:get, :post]
   match 'auth/:provider/callback', to: 'sessions#login', via: [:get, :post]
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
+  
+  resources :emails, :only => [:new, :create] do
+     get 'thank_you', :on => :collection
+end
+
+  
+
+
+  resources :emails, :only => [:new, :create] do
+     get 'thank_you', :on => :collection
+  end
 
   match '/show', to: 'google_places#show',  		  via: 'get'
   match '/set_session', to: 'google_places#set_session',     via: 'get'
 # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+ # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
@@ -69,4 +90,8 @@ Crispychicken::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+ 
+   
 end
