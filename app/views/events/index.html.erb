@@ -1,8 +1,11 @@
+<%= javascript_include_tag "google_places", "data-turbolinks-track" => true %>
+
 <p>Alright, do you know where you want to go, or do you need some suggestions?</p>
 <p>
   <div class="well well-large3">
     <a href="#modal1" role="button" class="btn" data-toggle="modal">I know what I'm doing!</a>        
     <a href="#model2" role="button" class="btn" data-toggle="modal">Give me some suggestions!</a>  
+    <button type="button" onclick="callquery();">Current Location</button>
   </div>
 </p>
 
