@@ -19,8 +19,6 @@ Crispychicken::Application.routes.draw do
      get 'thank_you', :on => :collection
 end
 
-  
-
   get "google_places/index"
   get "google_places/show"
   get "google_places/set_session"

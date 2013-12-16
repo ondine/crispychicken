@@ -20,6 +20,9 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    active_attr (0.8.2)
+      activemodel (>= 3.0.2, < 4.1)
+      activesupport (>= 3.0.2, < 4.1)
     activemodel (4.0.1)
       activesupport (= 4.0.1)
       builder (~> 3.1.0)
@@ -165,6 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   bcrypt-ruby
   coffee-rails (~> 4.0.0)
   foursquare2
@@ -173,6 +177,7 @@ DEPENDENCIES
   google_places
   jbuilder (~> 1.2)
   jquery-rails
+  mail
   mysql2
   omniauth
   omniauth-facebook (= 1.4.0)
