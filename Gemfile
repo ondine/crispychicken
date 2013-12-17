@@ -43,7 +43,12 @@ gem 'gmaps4rails'
 gem 'foursquare2'
 
 # Twitter Bootstrap for Rails
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+# gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'bootstrap-sass'
+
+group :development do
+  gem 'rails_layout'
+end
 
 # Google Places
 gem 'google_places'

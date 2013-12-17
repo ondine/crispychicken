@@ -8,3 +8,45 @@
 .modal-body {
 	max-height: none;
 }
+
+.rowheading {
+  background: #f0523f;
+  color: #FFF;
+  .heading {
+    text-align: center;
+  }
+  .social-network-row {
+    display: inline-block;
+    width: auto;
+    a {
+      img {
+	float: left;
+	width: 40px;
+	margin-left: 10px;
+      }
+    }
+  }
+}
+
+.eventform {
+  label {
+    padding-top: 15px;
+  }
+}
+
+.list-group {
+  a {
+    h4 {
+      height: 20px;
+      img, span {
+     	float: left;
+      }
+    }
+    p {
+      font-weight: normal;
+    }
+  }
+  .btn {
+    border-radius: 0;
+  }
+}

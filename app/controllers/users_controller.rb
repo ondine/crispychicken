@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+#	before_filter :redirect_if_signed_in, :only => [:index]
+	skip_before_filter :require_signin, :only => [:index, :new, :create]
 	# Homepage - allows creation of user 
 	def index
 		@user = User.new
@@ -20,10 +22,9 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update_attributes(user_params)
-			flash[:success] = "Profile updated"
-			redirect_to @user
+			redirect_to edit_user_path, :notice => "Your profile has been updated!"
 		else
-			render 'edit'
+			redirect_to edit_user_path, :alert => "Looks like there was an issue updating your profile!"
 		end
 	end
 
@@ -44,5 +45,11 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+	end
+
+	def redirect_if_signed_in
+		if current_user.present?
+			redirect_to events_path
+		end
 	end
 end
