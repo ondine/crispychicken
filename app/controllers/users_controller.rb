@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_signin, :only => [:index, :new, :create]
+	before_filter :redirect_if_signed_in, :only => [:index]
+	skip_before_filter :require_signin, :only => [:index, :new, :create]
 	# Homepage - allows creation of user 
 	def index
 		@user = User.new
@@ -45,5 +46,11 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+	end
+
+	def redirect_if_signed_in
+		if current_user.present?
+			redirect_to events_path
+		end
 	end
 end
