@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :require_signin, :only => [:index, :new, :create]
 	# Homepage - allows creation of user 
 	def index
 		@user = User.new
