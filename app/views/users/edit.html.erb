@@ -1,35 +1,39 @@
-<h1>Update Your Profile</h1>
-
-<%= form_for @user do |f| %>
-
-<%= render 'shared/error_messages' %>
-
-<p>
-	<%= f.label :firstname, "First Name" %>
-	<%= f.text_field :firstname %>
-</p>
-
-<p>
-	<%= f.label :lastname, "Last Name"  %>
-	<%= f.text_field :lastname %>
-</p>
-
-<p>
-	<%= f.label :email %>
-	<%= f.text_field :email %>
-</p>
-
-<p>
-	<%= f.label :password %>
-	<%= f.password_field :password %>
-</p>
-<p>
-	<%= f.label :password_confirmation,  "Confirm Password" %>
-	<%= f.password_field :password_confirmation%>
-</p>
-
-
-<p>
-	<%= f.submit "Save changes", class: "btn btn-primary" %>
-</p>
-<% end %>
+<div class="row rowheading">
+  <div class="heading">
+    <h1><%= @user.firstname %> <%= @user.lastname %></h1>
+    <h4>How does it feel to have your name in big letters?!</h4>
+  </div>
+</div>
+<div class="container marketing">
+<div class="col-md-4"></div>
+<div class="col-md-4 well">
+  <img src="/assets/chicken.png" class="img-circle>
+  <%= form_for @user do |f| %>
+    <div class="form-group">
+      <%= f.label :firstname, "First Name" %>
+      <%= f.text_field :firstname, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :lastname, "Last Name" %>
+      <%= f.text_field :lastname, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, "Email Address" %>
+      <%= f.email_field :email, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, "Password" %>
+      <%= f.password_field :password, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "First Name" %>
+      <%= f.password_field :password_confirmation, :class => "form-control" %>
+    </div>
+    <div class="form-group text-center">
+      <%= f.submit "Update Profile", :class => "btn btn-lg btn-primary" %>
+    </div>
+  <% end %>
+</div>
+<div class="col-md-4">
+</div>
+</div>

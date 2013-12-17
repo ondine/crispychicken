@@ -1,74 +1,57 @@
 <%= javascript_include_tag "google_places", "data-turbolinks-track" => true %>
-
-<p>Alright, do you know where you want to go, or do you need some suggestions?</p>
-<p>
-  <div class="well well-large3">
-    <a href="#modal1" role="button" class="btn" data-toggle="modal">I know what I'm doing!</a>        
-    <a href="#model2" role="button" class="btn" data-toggle="modal">Give me some suggestions!</a>  
-    <button type="button" onclick="callquery();">Current Location</button>
+<div class="row rowheading">
+  <div class="container marketing heading">
+    <h2>Welcome to CrispyChicken's Event Creator</h2>
+    <h4>Fill in the form below with your event locations!</h4>
   </div>
-</p>
-
-<!--stuff for modal triggered by buttons-->
-<!--modal1, for precise locations-->
-<div id="modal1" class="modal hide fade" tabindex="-1" role="input" aria-labelledby="modal1Label" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3>Event Details:</h3>
-  </div>
-  <div class="modal-body">
-    <%= form_for(@event, remote: true) do |f| %>
-    <div class="alert hide alert-success"></div>
-    <div class="form-group">
-      <%= f.label :event_name, 'Location Name' %>
-      <%= f.text_field :event_name %>
-      <%= f.label :location, 'Location Address' %>
-      <%= f.text_field :location %>
-      <%= f.label :event_details %>
-      <textarea name="event[event_details]" id="event_details"></textarea>
-      <%= f.label :event_date, 'Event Date' %>
-      <%= date_field(:event, :event_date) %>
-      <%= f.label :event_time, 'Event Time' %>      
-      <%= time_field(:event, :event_time) %>
-      <%= hidden_field(:event, :user_id, :value => session[:user_id] ) %>
-    </div> <!--form-group-->
-    <hr>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <%= f.submit("Add Venue", :class => "btn btn-primary") %>
-      <%= link_to 'Make the Map!', "events/show", :class => "btn btn-primary", 'data-no-turbolink' => true %>
-    </div> <!--modal footer-->
+</div>
+<div class="row formrow">
+  <div class="container marketing eventform">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+	<div class="panel-heading">Add an Event</div>
+        <div class="panel-body">
+	<%= form_for @event, remote: true do |f| %>
+        <div class="alert hide alert-success"></div>
+        <div class="form-group">
+          <%= f.label :event_name, 'Location Name' %>
+          <%= f.text_field :event_name, :class => "form-control"  %>
+          <%= f.label :location, 'Location Address' %>
+          <%= f.text_field :location, :class => "form-control"   %>
+          <%= f.label :event_details %>
+          <textarea name="event[event_details]" id="event_details" class="form-control"></textarea>
+          <%= f.label :event_date, 'Event Date' %>
+          <%= date_field :event, :event_date, :class => "form-control"   %>
+          <%= f.label :event_time, 'Event Time' %>      
+          <%= time_field :event, :event_time, :class => "form-control"   %>
+          <%= hidden_field(:event, :user_id, :value => session[:user_id] ) %>
+        </div> <!--form-group-->
+        <hr>
+        <%= f.submit("Add Venue", :class => "btn btn-primary") %>
+        <%= link_to 'Make the Map!', "events/show", :class => "btn btn-primary", 'data-no-turbolink' => true %>
+        </div>
     <% end %>
+    </div> <!-- Panel End -->
+    </div> <!-- Col End -->
+    <div class="col-md-6">
+        <div class="panel panel-info">
+	    <div class="panel-heading">How does it work?</div>
+	    <div class="panel-body">
+		<h4>What do I do?</h4>
+		<p>It's quite simple really. All you need to do is fill in the form with each of your event locations. If you would like to add another event, click on "Add Venue"</p>
+		<p>Once you are satisfied with all the events you have added, click on "Make the Map!"</p>
+		<h4>Location Name</h4>
+		<p>Ideally this would be the name of the venue to help us find it. I.e; Denny's Restaurant, The Cheesecake Factory</p>
+		<h4>Location Address</h4>
+		<p>Type in the FULL address of the location including street, city, zip and country!</p>
+		<h4>Event Details</h4>
+		<p>If you would like to add any additional information for your guest to view, this would be the place!</p>
+		<h4>Event Date</h4>
+		<p>Do we really need to explain this?</p>
+		<h4>Event Time</h4>
+		<p>What time would you like your guest to be at this particular venue?</p>
+	    </div> <!-- End Panel Body -->
+        </div> <!-- Panel End --> 
+    </div> <!-- Col End -->
   </div>
-
-<!--modal2, for suggested locations-->
-<div id="modal2" class="modal hide fade" tabindex="-1" role="input" aria-labelledby="modal1Label" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3>Suggestions:</h3>
-  </div>
-  <div class="modal-body">
-    <%= form_for(@event, remote: true) do |f| %>
-    <div class="alert hide alert-success"></div>
-    <div class="form-group">
-      <%= f.label :event_name, 'Location Name' %>
-      <%= f.text_field :event_name %>
-      <%= f.label :location, 'Location Address' %>
-      <%= f.text_field :location %>
-      <%= f.label :event_details %>
-      <textarea name="event[event_details]" id="event_details"></textarea>
-      <%= f.label :event_date, 'Event Date' %>
-      <%= date_field(:event, :event_date) %>
-      <%= f.label :event_time, 'Event Time' %>
-      <%= time_field(:event, :event_time) %>
-      <%= hidden_field(:event, :user_id, :value => current_user['id'] ) %>
-    </div> <!--form-group-->
-    <hr>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <%= f.submit("Add Venue", :class => "btn btn-primary") %>
-      <%= link_to 'Make the Map!', "events/show", :class => "btn btn-primary", 'data-no-turbolink' => true %>
-    </div> <!--modal footer-->
-    <% end %>
-  </div>
-
+</div>

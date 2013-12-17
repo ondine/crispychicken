@@ -1,21 +1,11 @@
-<h1>Your Profile</h1>
-
-	<p>
-	<b>First Name:</b>
-  <%= @user.firstname %>
-</p>
-
-<p>
-  <b>Last Name:</b>
-  <%= @user.lastname %>
-</p>
-
-<p>
-  <b>Email Address:</b>
-  <%= @user.email %>
-</p>
-
-
-<%= link_to 'Edit Your Profile', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %> 
-
+<div class="row rowheading">
+  <div class="heading">
+    <h1><%= @user.firstname %> <%= @user.lastname %></h1>
+    <h4>How does it feel to have your name in big letters?!</h4>
+  </div>
+</div>
+<div class="container marketing">
+  <div class="col-md-8">
+    
+  </div>
+</div>
