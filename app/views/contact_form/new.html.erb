@@ -1,5 +1,5 @@
 <h2>Get in Touch</h2>
-<%= simple_form_for @contact_form do |f| %>
+<%= form_for @contact_form do |f| %>
   <%= f.input :name, :required => false %>
   <%= f.input :email, :required => false %>
   <%= f.input :message, :as => :text, :required => false %>
