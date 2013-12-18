@@ -20,5 +20,15 @@ module Crispychicken
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    
+    config.action_mailer.smtp_settings = {
+      :address => "smtp.live.com",
+      :port => 587,
+      :domain => "smtp.live.com",
+      :user_name => "Crispy_Chicken@live.com",
+      :password => "Chispa888",
+      :authentication => "plain",
+      :enable_starttls_auto => true
+      }
   end
 end
