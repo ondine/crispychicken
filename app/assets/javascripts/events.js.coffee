@@ -22,7 +22,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     closeBoxURL: "http://maps.google.com/mapfiles/kml/pal5/icon7.png"
 
 @buildMap = (markers) ->
-  handler = Gmaps.build 'Google', { builders: { Marker: RichMarkerBuilder} } #dependency injection
+  handler = Gmaps.build 'Google', { builders: { Marker: RichMarkerBuilder}, markers: { maxRandomDistance: null} } #dependency injection
 
   #then standard use
   handler.buildMap { provider: {}, internal: {id: 'map'} }, ->

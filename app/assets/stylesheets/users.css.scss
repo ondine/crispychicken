@@ -4,16 +4,16 @@
 
 .jumbotron {
 	color: #333;
-	height: 360px;
-	background: url('google-bg.png');
+	height: 400px;
+	background: url('sf.png');
 	background-position: center;
 	background-size: cover;
 	text-align: center;
 	padding: 20px;
 	position: relative;
 	border: 1px solid #ccc;
-	margin-bottom: 30px;
-
+	margin-bottom: 0px;
+	border-radius: 0px !important;
 	h1 {
     	letter-spacing: 1px;
     	font-size: 94px;
@@ -69,4 +69,8 @@
   img {
     width: 85px;
   }
+}
+
+.col-lg-4 {
+  text-align: center;
 }
