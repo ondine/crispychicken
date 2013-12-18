@@ -2,43 +2,50 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js' type='text/javascript'></script>
-<table>
-    <tr>
-      <td style="width: 31%;" align="left" valign="top">
-        <%
-            iStr = "A"; 
-            i = 0 
-        %>  
-        <ul class="mapSidebar" id="markers_list">
+<div class="row rowheading">
+    <div class="heading">
+        <h1>Time to get this show on the road!</h1>
+        <h4>Share your event with your friends and family</h4>
+        <div class="social-network-row">
+            <a href="#" onclick="javascript:newWindow('http://www.facebook.com/sharer.php?u=<%= root_url %>events/public?event_id=<%= session[:user_id] %>')"><img src="/assets/fb.png" class="social-network"></a>
+            <a href="#" onclick="javascript:newWindow('https://plus.google.com/share?url=<%= root_url %>events/public?event_id=<%= session[:user_id] %>')"><img src="/assets/google.png" class="social-network"></a>
+            <a href="#" onclick="javascript:newWindow('http://twitter.com/share?url=<%= root_url %>events/public?event_id=<%= session[:user_id] %>')"><img src="/assets/twitter.png" class="social-network"></a>
+            <a href="mailto:?subject=Check out my event!&amp;body=Check out my event here - <%= root_url %>"><img src="/assets/email.png" class="social-network"></a>
+        </div>
+    </div>
+</div> <!-- End Heading Row -->
+<%
+    iStr = "A"
+    i = 0
+%>
+<div class="row eventcontent">
+    <div class="col-md-4" style="height: 800px; overflow-y: scroll;">
+        <div class="list-group">
             <% @events.each do |event| %>
-                <li>
-                  <ol>
-                      <li><img src= "http://maps.google.com/mapfiles/kml/paddle/<%= iStr %>.png" class="markerSize" />&nbsp;<a href="javascript:void(0)" class="mapEventName" id="<%= i %>"><%= event.event_name %></a></li> 
-                      <li>
-                          <ul>
-                              <li class="mapEventLocation">Date: <%= event.event_date %> @ <%= event.event_time.strftime("%H:%M:%S") %></li>
-                              <li class="mapEventLocation"><%= event.address %></li>
-                              <li class="mapEventLocation"><%= event.event_details %></li>
-                              <li class="mapEventLocation">
-                              </li>
-                              <li></li>
-                          </ul>
-                      </li>
-                  </ol>
-                </li>    
-                <% iStr = iStr.succ %>
-                <% i = i + 1 %>
-                <br />
-            <% end %>
-        </ul>   
-      </td>
-      <td style="width: 1%"></td>         
-      <td class="mapSection">
-          <div id="map" class="mapDIV"></div>
-      </td>
-    </tr>
-</table>
-
+            <a href="javascript:void(0)" class="list-group-item mapEventName" id="<%= i %>">
+                <h4><img src= "http://maps.google.com/mapfiles/kml/paddle/<%= iStr %>.png" class="markerSize" /><span><%= event.event_name %></span></h4>
+                <p>Date: <%= event.event_date %> @ <%= event.event_time.strftime("%H:%M:%S") %></p>
+                <p><%= event.address %></p>
+                <p><%= event.event_details %></p>
+            </a>
+            <%
+                iStr = iStr.succ
+                i += 1
+            %>
+            <% end %> <!-- End Events -->
+        </div> <!-- End List Group -->
+    </div>
+    <div class="col-md-8 mapSection">
+        <div id="map" class="mapDIV"></div>
+    </div>
+</div>
 <script type="text/javascript">
-  buildMap(<%=raw @hash.to_json %>);    
+function newWindow(url) {
+    window.open(url,'something','width=600,height=250,resizable=yes');
+}
 </script>
+<script type="text/javascript">
+  buildMap(<%=raw @hash.to_json %>);
+
+</script>
+
