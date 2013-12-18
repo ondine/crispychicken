@@ -1,20 +1,17 @@
 Crispychicken::Application.routes.draw do
-  get "email/new"
-  get "email/create"
+  resources :contact_forms
+  get "contact_form/new"
+  get "contact_form/create"
   match '/events/public',  to: 'events#public', via: 'get'
 
-  resources :users, :events, :sessions, :contact_form
+  resources :users, :events, :sessions 
   match '/about',  to: 'information#about',            via: 'get'
-  match '/contact',  to: 'contact_form#new',            via: 'get'
-  
+  match '/contact',  to: 'contact_forms#new',    via: 'get' , :as => :contact
+  match '/thank_you', to: 'contact_forms#thank_you', via: 'post', :as => :thank_you
   resources :sessions do 
    # post 'login'
   end
-
-
-
-
-
+  
   root :to => "users#index"
   match '/signup',  to: 'users#new',                      via: 'get'
   match '/signin',  to: 'sessions#new',                   via: 'get'
@@ -23,10 +20,7 @@ Crispychicken::Application.routes.draw do
   match 'auth/failure', to: redirect('/'),                via: [:get, :post]
 
 
-  resources :emails, :only => [:new, :create] do
-     get 'thank_you', :on => :collection
-  end
-
+  
   match '/show', to: 'google_places#show',  		  via: 'get'
   match '/set_session', to: 'google_places#set_session',     via: 'get'
 # The priority is based upon order of creation: first created -> highest priority.
